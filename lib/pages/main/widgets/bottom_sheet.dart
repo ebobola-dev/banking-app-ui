@@ -34,16 +34,17 @@ class _OperationsBottomSheetState extends State<OperationsBottomSheet> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
+    final initHeight = context.read<BottomSheetBloc>().state.size;
     return DraggableScrollableSheet(
       controller: _sheetController,
       minChildSize: BottomSheetState.minHeight,
       maxChildSize: BottomSheetState.maxHeight,
-      initialChildSize: BottomSheetState.initHeight,
+      initialChildSize: initHeight,
       snap: true,
       snapSizes: const [
         BottomSheetState.minHeight,
         BottomSheetState.initHeight,
-        BottomSheetState.maxHeight
+        BottomSheetState.maxHeight,
       ],
       builder: (context, scrollController) {
         return SingleChildScrollView(

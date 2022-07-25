@@ -4,7 +4,7 @@ import 'package:baking_app_ui/bloc/bottom_sheet/bottom_sheet_bloc.dart';
 import 'package:baking_app_ui/bloc/bottom_sheet/bottom_sheet_state.dart';
 import 'package:baking_app_ui/bloc/page/page_bloc.dart';
 import 'package:baking_app_ui/bloc/page/page_state.dart';
-import 'package:baking_app_ui/pages/home/widgets/nav_bar_item.dart';
+import 'package:baking_app_ui/pages/main/widgets/nav_bar_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
