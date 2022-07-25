@@ -1,16 +1,14 @@
 import 'dart:ui';
 
+import 'package:baking_app_ui/bloc/bottom_sheet/bottom_sheet_bloc.dart';
+import 'package:baking_app_ui/bloc/bottom_sheet/bottom_sheet_event.dart';
+import 'package:baking_app_ui/bloc/bottom_sheet/bottom_sheet_state.dart';
 import 'package:baking_app_ui/bloc/operations/operations_bloc.dart';
 import 'package:baking_app_ui/bloc/operations/operations_state.dart';
 import 'package:baking_app_ui/cards/operation_card.dart';
-import 'package:baking_app_ui/pages/home/widgets/my_nav_bar.dart';
 import 'package:baking_app_ui/theme/config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-const minHeight = .4;
-const maxHeight = .96;
-const initHeight = .6;
 
 class OperationsBottomSheet extends StatefulWidget {
   const OperationsBottomSheet({Key? key}) : super(key: key);
@@ -24,15 +22,29 @@ class _OperationsBottomSheetState extends State<OperationsBottomSheet> {
   final _operationListKey = GlobalKey<AnimatedListState>();
 
   @override
+  void initState() {
+    _sheetController.addListener(() {
+      context
+          .read<BottomSheetBloc>()
+          .add(ChangeBottomSheetSizeEvent(_sheetController.size));
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     return DraggableScrollableSheet(
       controller: _sheetController,
-      minChildSize: minHeight,
-      maxChildSize: maxHeight,
-      initialChildSize: initHeight,
+      minChildSize: BottomSheetState.minHeight,
+      maxChildSize: BottomSheetState.maxHeight,
+      initialChildSize: BottomSheetState.initHeight,
       snap: true,
-      snapSizes: const [minHeight, initHeight, maxHeight],
+      snapSizes: const [
+        BottomSheetState.minHeight,
+        BottomSheetState.initHeight,
+        BottomSheetState.maxHeight
+      ],
       builder: (context, scrollController) {
         return SingleChildScrollView(
           controller: scrollController,
@@ -114,12 +126,12 @@ class _OperationsBottomSheetState extends State<OperationsBottomSheet> {
                       ],
                     ),
                   ),
-                  const Positioned(
-                    bottom: 50.0,
-                    left: 15.0,
-                    right: 15.0,
-                    child: MyNavBar(),
-                  ),
+                  // const Positioned(
+                  //   bottom: 50.0,
+                  //   left: 15.0,
+                  //   right: 15.0,
+                  //   child: MyNavBar(),
+                  // ),
                 ],
               ),
             ),
