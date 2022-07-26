@@ -68,8 +68,9 @@ class _NavBarItemState extends State<NavBarItem>
           width: 55,
           height: 55,
           child: InkWell(
-            onTap: () =>
-                context.read<PageBloc>().add(ChangePageEvent(widget.index)),
+            onTap: () => context
+                .read<PageBloc>()
+                .add(ChangePageEvent(newPage: widget.index)),
             borderRadius: BorderRadius.circular(50.0),
             child: Padding(
               padding: const EdgeInsets.all(12.0),

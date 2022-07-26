@@ -2,5 +2,6 @@ abstract class PageEvent {}
 
 class ChangePageEvent extends PageEvent {
   final int newPage;
-  ChangePageEvent(this.newPage);
+  final bool fromScroll;
+  ChangePageEvent({required this.newPage, this.fromScroll = false});
 }

@@ -52,7 +52,7 @@ class MyNavBar extends StatelessWidget {
                         return AnimatedPositioned(
                           duration: const Duration(milliseconds: 300),
                           left: pageState.page * smallLineWidth,
-                          bottom: bottomSheetState.isMax ? 0 : -5,
+                          bottom: bottomSheetState.isMax ? 0 : -6.0,
                           child: Container(
                             width: smallLineWidth,
                             height: 5.0,

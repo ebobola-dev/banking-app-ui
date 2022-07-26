@@ -9,7 +9,7 @@ class ThemeConfig {
   static const buttonColor = Color(0x26FAFAFA); //? 26 - 15%
   static const navBarColor = Color(0xB328292B); //? B3 - 70%
   static const font = 'Metropolis';
-  static const defaultPadding = 15.0;
+  static const defaultPadding = 25.0;
 
   static const positiveOperationColor = Color(0xFF53D496);
   static const negativeOperationColor = Color(0xFFFF5959);
