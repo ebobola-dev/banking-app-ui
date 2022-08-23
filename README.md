@@ -9,7 +9,7 @@
 
 #### Скриншоты
 <img src="/assets/screenshots/home_page.jpg" alt="home_page" width="200"/> <img src="/assets/screenshots/activity_page.jpg" alt="activity_page" width="200"/>
-<img src="/assets/screenshots/card_page.jpg" alt="card_page" width="200"/> <img src="/assets/screenshots/hidden_nav_bar.jpg" alt="hidden_nav_bar" width="200"/>
+<img src="/assets/screenshots/card_page.jpg" alt="card_page" width="200"/> <img src="/assets/screenshots/hidden_nav_bar(remove).jpg" alt="hidden_nav_bar(remove)" width="200"/>
 
 #### Используемые библиотеки
 - **flutter_svg**
