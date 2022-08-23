@@ -1,16 +1,18 @@
-# baking_app_ui
+# Верстка макета [Banking App](https://docs.flutter.dev/get-started/codelab) на Flutter
 
-A new Flutter project.
+#### Немного о многом
 
-## Getting Started
+- Всего три экрана
+- На каждом экране присутствуют анимации, которые запускаются при открытии экрана
+- Реализовано всё в точности так, как в макете, кроме графика на экране Activity (он получился кривой)
+- **Если** на экране присутсвует bottom sheet, то панель навигации скрывается, когда этот bottom sheet раскрывается полностью (во всю высоту), **иначе** при панель навигации скрывается при скроле страницы (панель отображается, только когда мы находимся наверху страницы)
 
-This project is a starting point for a Flutter application.
+#### Скриншоты
+<img src="/assets/screenshots/home_page.jpg" alt="home_page" width="200"/> <img src="/assets/screenshots/activity_page.jpg" alt="activity_page" width="200"/>
+<img src="/assets/screenshots/card_page.jpg" alt="card_page" width="200"/> <img src="/assets/screenshots/hidden_nav_bar.jpg" alt="hidden_nav_bar" width="200"/>
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+#### Используемые библиотеки
+- **flutter_svg**
+- **equatable**
+- **flutter_bloc**
+- **flutter_slidable**
