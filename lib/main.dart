@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
             BlocProvider(create: (context) => PageBloc(navBarBloc: navBarBloc)),
           ],
           child: MaterialApp(
-            title: 'Bakign App UI',
+            title: 'Banking App UI',
             debugShowCheckedModeBanner: false,
             theme: getThemeData(context),
             home: const MainPage(),
