@@ -106,4 +106,12 @@ ThemeData getThemeData(BuildContext context) => ThemeData.dark().copyWith(
           borderRadius: BorderRadius.circular(30.0),
         ),
       ),
+      popupMenuTheme: const PopupMenuThemeData(
+        color: ThemeConfig.secondaryColor,
+        elevation: 7.0,
+        textStyle: TextStyle(
+          fontSize: 15.0,
+          fontFamily: ThemeConfig.font,
+        ),
+      ),
     );

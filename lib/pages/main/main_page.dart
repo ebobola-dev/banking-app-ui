@@ -26,7 +26,7 @@ class _MainPageState extends State<MainPage> {
         _subPageController.animateToPage(
           pageState.page,
           duration: const Duration(milliseconds: 300),
-          curve: Curves.bounceInOut,
+          curve: Curves.linear,
         );
       },
       child: Scaffold(

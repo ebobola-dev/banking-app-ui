@@ -5,6 +5,7 @@ import 'package:baking_app_ui/bloc/operations/operations_state.dart';
 import 'package:baking_app_ui/cards/operation_card.dart';
 import 'package:baking_app_ui/global_widgets/circle_down_button.dart';
 import 'package:baking_app_ui/global_widgets/header.dart';
+import 'package:baking_app_ui/pages/main/sub_pages/home/widgets/bank_card_image.dart';
 import 'package:baking_app_ui/pages/main/widgets/bottom_sheet.dart';
 import 'package:baking_app_ui/theme/config.dart';
 import 'package:flutter/material.dart';
@@ -17,13 +18,33 @@ class HomeSubPage extends StatefulWidget {
   State<HomeSubPage> createState() => _HomeSubPageState();
 }
 
-class _HomeSubPageState extends State<HomeSubPage> {
+class _HomeSubPageState extends State<HomeSubPage>
+    with SingleTickerProviderStateMixin {
+  final _scrollController = ScrollController();
   final _operationListKey = GlobalKey<AnimatedListState>();
+  late final AnimationController _animationController;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 600),
+    );
+    _animationController.forward();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomSheet: MyBottomSheet(
+        animationController: _animationController,
         child: BlocBuilder<OperationsBloc, OperationsState>(
           builder: (context, operationState) => AnimatedList(
             key: _operationListKey,
@@ -58,6 +79,7 @@ class _HomeSubPageState extends State<HomeSubPage> {
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(ThemeConfig.defaultPadding),
+          controller: _scrollController,
           child: Column(
             children: [
               Header(
@@ -81,18 +103,7 @@ class _HomeSubPageState extends State<HomeSubPage> {
                 ),
               ),
               const SizedBox(height: 50),
-              Container(
-                decoration: const BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Color(0x80d2bbaa),
-                      offset: Offset(0, 5),
-                      blurRadius: 20,
-                    ),
-                  ],
-                ),
-                child: Image.asset("assets/images/bank-card.png"),
-              ),
+              BankCardImage(animationController: _animationController),
             ],
           ),
         ),

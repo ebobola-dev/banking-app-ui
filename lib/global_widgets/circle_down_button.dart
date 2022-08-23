@@ -4,16 +4,18 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class CircleDownButton extends StatelessWidget {
   final VoidCallback onTap;
+  final double size;
   const CircleDownButton({
     Key? key,
     required this.onTap,
+    this.size = 30.0,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 30.0,
-      height: 30.0,
+      width: size,
+      height: size,
       child: Stack(
         children: [
           Container(

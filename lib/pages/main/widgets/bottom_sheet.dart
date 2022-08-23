@@ -1,15 +1,20 @@
 import 'dart:ui';
 
-import 'package:baking_app_ui/bloc/bottom_sheet/bottom_sheet_bloc.dart';
-import 'package:baking_app_ui/bloc/bottom_sheet/bottom_sheet_event.dart';
-import 'package:baking_app_ui/bloc/bottom_sheet/bottom_sheet_state.dart';
+import 'package:baking_app_ui/bloc/nav_bar/nav_bar_bloc.dart';
+import 'package:baking_app_ui/bloc/nav_bar/nav_bar_event.dart';
+import 'package:baking_app_ui/config.dart';
 import 'package:baking_app_ui/theme/config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyBottomSheet extends StatefulWidget {
   final Widget child;
-  const MyBottomSheet({Key? key, required this.child}) : super(key: key);
+  final AnimationController animationController;
+  const MyBottomSheet({
+    Key? key,
+    required this.animationController,
+    required this.child,
+  }) : super(key: key);
 
   @override
   State<MyBottomSheet> createState() => _MyBottomSheetState();
@@ -20,10 +25,23 @@ class _MyBottomSheetState extends State<MyBottomSheet> {
 
   @override
   void initState() {
+    final navBarBloc = context.read<NavBarBloc>();
     _sheetController.addListener(() {
-      context
-          .read<BottomSheetBloc>()
-          .add(ChangeBottomSheetSizeEvent(_sheetController.size));
+      if (_sheetController.size >= BottomSheetHeights.max - .05) {
+        navBarBloc.add(HideNavBarEvent());
+      } else {
+        navBarBloc.add(ShowNavBarEvent());
+      }
+    });
+
+    widget.animationController.addListener(() {
+      if (widget.animationController.status == AnimationStatus.completed) {
+        _sheetController.animateTo(
+          BottomSheetHeights.middle,
+          duration: const Duration(milliseconds: 600),
+          curve: Config.mainCurve,
+        );
+      }
     });
     super.initState();
   }
@@ -31,18 +49,21 @@ class _MyBottomSheetState extends State<MyBottomSheet> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-    final initHeight = context.read<BottomSheetBloc>().state.size;
+    final initHeight =
+        widget.animationController.status == AnimationStatus.completed
+            ? _sheetController.size
+            : BottomSheetHeights.min;
     return DraggableScrollableSheet(
       controller: _sheetController,
-      minChildSize: BottomSheetState.minHeight,
-      maxChildSize: BottomSheetState.maxHeight,
+      minChildSize: BottomSheetHeights.min,
+      maxChildSize: BottomSheetHeights.max,
       initialChildSize: initHeight,
       expand: false,
       snap: true,
       snapSizes: const [
-        BottomSheetState.minHeight,
-        BottomSheetState.initHeight,
-        BottomSheetState.maxHeight,
+        BottomSheetHeights.min,
+        BottomSheetHeights.middle,
+        BottomSheetHeights.max,
       ],
       builder: (context, scrollController) {
         return SingleChildScrollView(
@@ -59,7 +80,9 @@ class _MyBottomSheetState extends State<MyBottomSheet> {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      color: Theme.of(context).secondaryHeaderColor,
+                      color: Theme.of(context)
+                          .secondaryHeaderColor
+                          .withOpacity(.7),
                       border: Border.all(color: ThemeConfig.buttonColor),
                       borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(30.0),
