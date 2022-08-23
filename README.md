@@ -1,5 +1,5 @@
-# Верстка макета [Banking App](https://docs.flutter.dev/get-started/codelab) на Flutter
-
+# Верстка макета [Banking App](https://www.figma.com/community/file/1114624124722652699) на Flutter
+## Макет был взят с телеграм канала [Сайтодел](https://t.me/sitodel)
 #### Немного о многом
 
 - Всего три экрана
