@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class Charts extends StatelessWidget {
   final AnimationController animationController;
-  const Charts({Key? key, required this.animationController}) : super(key: key);
+  const Charts({super.key, required this.animationController});
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +25,10 @@ class ChartsItem extends StatelessWidget {
   final ChartTypes chartType;
   final AnimationController animationController;
   const ChartsItem({
-    Key? key,
+    super.key,
     required this.animationController,
     required this.chartType,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +90,8 @@ class ChartsItem extends StatelessWidget {
         const SizedBox(height: 20),
         SvgPicture.asset(
           Config.chartSvgPaths[chartType]!,
-          color: ChartColors.chartItemColors[chartType]![0],
+          colorFilter: ColorFilter.mode(
+              ChartColors.chartItemColors[chartType]![0], BlendMode.srcIn),
         ),
       ],
     );

@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CardsSubPage extends StatefulWidget {
-  const CardsSubPage({Key? key}) : super(key: key);
+  const CardsSubPage({super.key});
 
   @override
   State<CardsSubPage> createState() => _CardsSubPageState();
@@ -40,6 +40,7 @@ class _CardsSubPageState extends State<CardsSubPage>
   Widget build(BuildContext context) {
     return Scaffold(
       bottomSheet: MyBottomSheet(
+        screenHeight: MediaQuery.of(context).size.height,
         animationController: _animationController,
         child: ListView(
           shrinkWrap: true,
@@ -58,7 +59,7 @@ class _CardsSubPageState extends State<CardsSubPage>
               Header(
                 leftWidget: Text(
                   'Cards',
-                  style: Theme.of(context).textTheme.headline1,
+                  style: Theme.of(context).textTheme.displayLarge,
                 ),
                 rightWidget: IconButton(
                   onPressed: () {},
@@ -76,14 +77,15 @@ class _CardsSubPageState extends State<CardsSubPage>
                 children: [
                   GradientText(
                     text: 'Ultimate',
-                    style: Theme.of(context).textTheme.headline1,
+                    style: Theme.of(context).textTheme.displayLarge,
                     gradient: const LinearGradient(colors: [
                       Color(0xFF8E6BAE),
                       Color(0xFFFCDACF),
                       Color(0xFFFF827B),
                     ]),
                   ),
-                  Text(' Card', style: Theme.of(context).textTheme.headline1),
+                  Text(' Card',
+                      style: Theme.of(context).textTheme.displayLarge),
                 ],
               ),
             ],

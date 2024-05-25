@@ -4,28 +4,27 @@ import 'package:flutter/material.dart';
 ThemeData getThemeData(BuildContext context) => ThemeData.dark().copyWith(
       primaryColor: ThemeConfig.primaryColor,
       secondaryHeaderColor: ThemeConfig.secondaryColor,
-      backgroundColor: ThemeConfig.backgroundColor,
       scaffoldBackgroundColor: ThemeConfig.backgroundColor,
       iconTheme: const IconThemeData(color: ThemeConfig.iconColor),
       textTheme: const TextTheme(
-        headline1: TextStyle(
+        displayLarge: TextStyle(
           fontSize: 30.0,
           fontWeight: FontWeight.bold,
         ),
-        headline2: TextStyle(
+        displayMedium: TextStyle(
           fontSize: 22.0,
           fontWeight: FontWeight.bold,
         ),
-        headline3: TextStyle(
+        displaySmall: TextStyle(
           fontSize: 15.0,
           fontWeight: FontWeight.bold,
         ),
-        headline4: TextStyle(
+        headlineMedium: TextStyle(
           fontSize: 15.0,
           fontWeight: FontWeight.w600,
           color: Color(0x4DFFFFFF),
         ),
-        headline5: TextStyle(
+        headlineSmall: TextStyle(
           fontSize: 20.0,
           fontWeight: FontWeight.bold,
         ),
@@ -48,7 +47,7 @@ ThemeData getThemeData(BuildContext context) => ThemeData.dark().copyWith(
           const TextSelectionThemeData(cursorColor: ThemeConfig.textColor),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          primary: ThemeConfig.primaryColor,
+          backgroundColor: ThemeConfig.primaryColor,
           padding: const EdgeInsets.symmetric(
             vertical: 10.0,
             horizontal: 10.0,
@@ -66,10 +65,6 @@ ThemeData getThemeData(BuildContext context) => ThemeData.dark().copyWith(
             color: ThemeConfig.primaryColor,
           ),
         ),
-      ),
-      colorScheme: const ColorScheme.dark(
-        primary: ThemeConfig.primaryColor,
-        secondary: ThemeConfig.secondaryColor,
       ),
       inputDecorationTheme: InputDecorationTheme(
         labelStyle: TextStyle(
@@ -114,4 +109,8 @@ ThemeData getThemeData(BuildContext context) => ThemeData.dark().copyWith(
           fontFamily: ThemeConfig.font,
         ),
       ),
+      colorScheme: const ColorScheme.dark(
+        primary: ThemeConfig.primaryColor,
+        secondary: ThemeConfig.secondaryColor,
+      ).copyWith(background: ThemeConfig.backgroundColor),
     );

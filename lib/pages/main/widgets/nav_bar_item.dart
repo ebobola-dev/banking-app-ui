@@ -11,11 +11,11 @@ class NavBarItem extends StatefulWidget {
   final Color activeColor;
   final Color inactiveColor;
   const NavBarItem({
-    Key? key,
+    super.key,
     required this.index,
     required this.activeColor,
     required this.inactiveColor,
-  }) : super(key: key);
+  });
 
   @override
   State<NavBarItem> createState() => _NavBarItemState();
@@ -76,7 +76,8 @@ class _NavBarItemState extends State<NavBarItem>
               padding: const EdgeInsets.all(12.0),
               child: SvgPicture.asset(
                 Config.pagesSvg[widget.index],
-                color: _colorAnimation.value,
+                colorFilter:
+                    ColorFilter.mode(_colorAnimation.value!, BlendMode.srcIn),
               ),
             ),
           ),

@@ -11,10 +11,10 @@ class AchievementProgress extends StatelessWidget {
   final int progress;
   final AnimationController animationController;
   const AchievementProgress({
-    Key? key,
+    super.key,
     required this.progress,
     required this.animationController,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +94,7 @@ class AchievementProgress extends StatelessWidget {
             Text(
               'To discover a new\nachievement',
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headline3,
+              style: Theme.of(context).textTheme.displaySmall,
             ),
           ],
         ),

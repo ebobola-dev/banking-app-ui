@@ -11,10 +11,10 @@ class OperationCard extends StatelessWidget {
   final Operation operation;
   final VoidCallback onRemove;
   const OperationCard({
-    Key? key,
+    super.key,
     required this.operation,
     required this.onRemove,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,7 @@ class OperationCard extends StatelessWidget {
                 'remove',
                 maxLines: 1,
                 overflow: TextOverflow.clip,
-                style: Theme.of(context).textTheme.headline5,
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
             ),
           ),
@@ -104,7 +104,10 @@ class OperationCard extends StatelessWidget {
                   ),
                   child: SvgPicture.asset(
                     operation.svgPath,
-                    color: const Color(0xA6232323),
+                    colorFilter: const ColorFilter.mode(
+                      Color(0xA6232323),
+                      BlendMode.srcIn,
+                    ),
                   ),
                 ),
                 const SizedBox(width: 30),
@@ -114,18 +117,18 @@ class OperationCard extends StatelessWidget {
                     children: [
                       Text(
                         operation.copmpanyName,
-                        style: Theme.of(context).textTheme.headline2,
+                        style: Theme.of(context).textTheme.displayMedium,
                       ),
                       Text(
                         operation.stringTime,
-                        style: Theme.of(context).textTheme.headline4,
+                        style: Theme.of(context).textTheme.headlineMedium,
                       ),
                     ],
                   ),
                 ),
                 Text(
                   operation.amount,
-                  style: Theme.of(context).textTheme.headline5!.copyWith(
+                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                         color: operation.negative
                             ? ThemeConfig.negativeOperationColor
                             : ThemeConfig.positiveOperationColor,

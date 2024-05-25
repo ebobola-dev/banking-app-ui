@@ -11,7 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ActivitySubPage extends StatefulWidget {
-  const ActivitySubPage({Key? key}) : super(key: key);
+  const ActivitySubPage({super.key});
 
   @override
   State<ActivitySubPage> createState() => _ActivitySubPageState();
@@ -32,12 +32,14 @@ class _ActivitySubPageState extends State<ActivitySubPage>
     _animationController.forward();
     final navBarBloc = context.read<NavBarBloc>();
     _scrollController.addListener(() {
-      if (_scrollController.position.atEdge) {
-        if (_scrollController.position.pixels != 0) {
-          navBarBloc.add(HideNavBarEvent());
+      if (_scrollController.hasClients) {
+        if (_scrollController.position.atEdge) {
+          if (_scrollController.position.pixels != 0) {
+            navBarBloc.add(HideNavBarEvent());
+          }
+        } else {
+          navBarBloc.add(ShowNavBarEvent());
         }
-      } else {
-        navBarBloc.add(ShowNavBarEvent());
       }
     });
   }
@@ -72,12 +74,11 @@ class _ActivitySubPageState extends State<ActivitySubPage>
                     Header(
                       leftWidget: Text(
                         'Activity',
-                        style: Theme.of(context).textTheme.headline1,
+                        style: Theme.of(context).textTheme.displayLarge,
                       ),
                       rightWidget: PopupMenuButton(
                         icon: SvgPicture.asset(
                           'assets/svg/dots.svg',
-                          width: 24.0,
                         ),
                         padding: const EdgeInsets.all(12.0),
                         splashRadius: 28.0,
@@ -106,7 +107,10 @@ class _ActivitySubPageState extends State<ActivitySubPage>
                   ],
                 ),
               ),
-              BottomClip(animationController: _animationController),
+              BottomClip(
+                animationController: _animationController,
+                screenWidth: MediaQuery.of(context).size.width,
+              ),
             ],
           ),
         ),

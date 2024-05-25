@@ -8,11 +8,13 @@ const clipHeight = 85.0;
 const widthsList = [0.13, 0.27, 0.33, 0.47, 0.52, 0.57, 0.69, 0.73, 0.86];
 
 class BottomClip extends StatefulWidget {
+  final double screenWidth;
   final AnimationController animationController;
   const BottomClip({
-    Key? key,
+    super.key,
     required this.animationController,
-  }) : super(key: key);
+    required this.screenWidth,
+  });
 
   @override
   State<BottomClip> createState() => _BottomClipState();
@@ -24,9 +26,7 @@ class _BottomClipState extends State<BottomClip> {
   @override
   void initState() {
     super.initState();
-    final screenWidth =
-        (window.physicalSize.shortestSide / window.devicePixelRatio);
-    _path = drawPath(screenWidth, clipHeight);
+    _path = drawPath(widget.screenWidth, clipHeight);
   }
 
   Path drawPath(double w, double h) {

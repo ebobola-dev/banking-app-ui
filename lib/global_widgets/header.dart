@@ -4,10 +4,10 @@ class Header extends StatelessWidget {
   final Widget leftWidget;
   final Widget rightWidget;
   const Header({
-    Key? key,
+    super.key,
     required this.leftWidget,
     required this.rightWidget,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

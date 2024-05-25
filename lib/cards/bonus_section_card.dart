@@ -8,9 +8,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 class BonusSectionCard extends StatelessWidget {
   final BonusSection section;
   const BonusSectionCard({
-    Key? key,
+    super.key,
     required this.section,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,10 @@ class BonusSectionCard extends StatelessWidget {
                 ),
                 child: SvgPicture.asset(
                   section.svgPath,
-                  color: const Color(0xA6232323),
+                  colorFilter: const ColorFilter.mode(
+                    Color(0xA6232323),
+                    BlendMode.srcIn,
+                  ),
                 ),
               ),
               const SizedBox(width: 30),
@@ -50,11 +53,11 @@ class BonusSectionCard extends StatelessWidget {
                   children: [
                     Text(
                       section.title,
-                      style: Theme.of(context).textTheme.headline2,
+                      style: Theme.of(context).textTheme.displayMedium,
                     ),
                     Text(
                       section.subtitle,
-                      style: Theme.of(context).textTheme.headline4,
+                      style: Theme.of(context).textTheme.headlineMedium,
                     ),
                   ],
                 ),

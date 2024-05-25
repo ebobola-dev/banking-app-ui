@@ -12,7 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeSubPage extends StatefulWidget {
-  const HomeSubPage({Key? key}) : super(key: key);
+  const HomeSubPage({super.key});
 
   @override
   State<HomeSubPage> createState() => _HomeSubPageState();
@@ -45,6 +45,7 @@ class _HomeSubPageState extends State<HomeSubPage>
     return Scaffold(
       bottomSheet: MyBottomSheet(
         animationController: _animationController,
+        screenHeight: MediaQuery.of(context).size.height,
         child: BlocBuilder<OperationsBloc, OperationsState>(
           builder: (context, operationState) => AnimatedList(
             key: _operationListKey,
@@ -87,7 +88,7 @@ class _HomeSubPageState extends State<HomeSubPage>
                   children: [
                     Text(
                       '\$14,095',
-                      style: Theme.of(context).textTheme.headline1,
+                      style: Theme.of(context).textTheme.displayLarge,
                     ),
                     const SizedBox(width: 10),
                     CircleDownButton(

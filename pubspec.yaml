@@ -13,16 +13,16 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
-  flutter_svg: ^1.1.1+1
+  flutter_svg: ^2.0.10+1
   equatable: ^2.0.3
   flutter_bloc: ^8.0.1
-  flutter_slidable: ^2.0.0
+  flutter_slidable: ^3.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^2.0.0
+  flutter_lints: ^4.0.0
 
 flutter:
 

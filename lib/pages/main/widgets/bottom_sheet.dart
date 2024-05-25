@@ -9,12 +9,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyBottomSheet extends StatefulWidget {
   final Widget child;
+  final double screenHeight;
   final AnimationController animationController;
   const MyBottomSheet({
-    Key? key,
+    super.key,
     required this.animationController,
     required this.child,
-  }) : super(key: key);
+    required this.screenHeight,
+  });
 
   @override
   State<MyBottomSheet> createState() => _MyBottomSheetState();
@@ -22,42 +24,57 @@ class MyBottomSheet extends StatefulWidget {
 
 class _MyBottomSheetState extends State<MyBottomSheet> {
   final _sheetController = DraggableScrollableController();
+  late double sizedBoxHeight;
 
   @override
   void initState() {
     final navBarBloc = context.read<NavBarBloc>();
     _sheetController.addListener(() {
-      if (_sheetController.size >= BottomSheetHeights.max - .05) {
-        navBarBloc.add(HideNavBarEvent());
-      } else {
-        navBarBloc.add(ShowNavBarEvent());
+      if (_sheetController.isAttached) {
+        if (_sheetController.size >= BottomSheetHeights.max - .05) {
+          navBarBloc.add(HideNavBarEvent());
+        } else {
+          navBarBloc.add(ShowNavBarEvent());
+        }
       }
     });
 
     widget.animationController.addListener(() {
       if (widget.animationController.status == AnimationStatus.completed) {
-        _sheetController.animateTo(
-          BottomSheetHeights.middle,
-          duration: const Duration(milliseconds: 600),
-          curve: Config.mainCurve,
-        );
+        if (_sheetController.isAttached) {
+          _sheetController.animateTo(
+            BottomSheetHeights.middle,
+            duration: const Duration(milliseconds: 600),
+            curve: Config.mainCurve,
+          );
+        }
       }
     });
+
+    sizedBoxHeight = widget.screenHeight * BottomSheetHeights.min - 47.0 - 2.0;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {
+        sizedBoxHeight =
+            widget.screenHeight * _sheetController.size - 47.0 - 2.0;
+      });
+      _sheetController.addListener(() {
+        setState(() {
+          sizedBoxHeight =
+              widget.screenHeight * _sheetController.size - 47.0 - 2.0;
+        });
+      });
+    });
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final screenSize = MediaQuery.of(context).size;
-    final initHeight =
-        widget.animationController.status == AnimationStatus.completed
-            ? _sheetController.size
-            : BottomSheetHeights.min;
     return DraggableScrollableSheet(
       controller: _sheetController,
       minChildSize: BottomSheetHeights.min,
       maxChildSize: BottomSheetHeights.max,
-      initialChildSize: initHeight,
+      initialChildSize: BottomSheetHeights.min,
       expand: false,
       snap: true,
       snapSizes: const [
@@ -107,9 +124,7 @@ class _MyBottomSheetState extends State<MyBottomSheet> {
                           ),
                         ),
                         SizedBox(
-                          height: screenSize.height * _sheetController.size -
-                              47.0 -
-                              2.0,
+                          height: sizedBoxHeight,
                           child: widget.child,
                         ),
                       ],

@@ -6,10 +6,10 @@ class CircleDownButton extends StatelessWidget {
   final VoidCallback onTap;
   final double size;
   const CircleDownButton({
-    Key? key,
+    super.key,
     required this.onTap,
     this.size = 30.0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

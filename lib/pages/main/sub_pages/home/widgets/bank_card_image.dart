@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 class BankCardImage extends StatelessWidget {
   final AnimationController animationController;
   const BankCardImage({
-    Key? key,
+    super.key,
     required this.animationController,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
